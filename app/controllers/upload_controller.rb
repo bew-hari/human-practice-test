@@ -1,6 +1,7 @@
 class UploadController < ApplicationController
 
 	def index
+		session[:file_content] = nil
 	end
 
 	def create
@@ -14,8 +15,10 @@ class UploadController < ApplicationController
 		end
 	end
 
+	require 'string'
 	def analyze
-		@content = session[:file_content]
-		session[:file_content] = nil
+		@content = session[:file_content] || ''
+
+		@content = @content.to_stem
 	end
 end
