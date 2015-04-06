@@ -1,24 +1,20 @@
 class UploadController < ApplicationController
 
 	def index
-		session[:file_content] = nil
+		session[:filename] = nil
 	end
 
 	def create
-		filesave = TextFile.save(params[:upload])
-
-
-
-		name = params[:upload][:file].original_filename
-    directory = "public/images/upload"
-    path = File.join(directory, name)
-    File.open(path, "wb") { |f| f.write(params[:upload][:file].read) }
-    flash[:notice] = "File uploaded"
-    redirect_to "/upload/new"
-
-
-
-
+			
+			#puts 'FileFileFile:' + params[:upload][:file].tempfile.path
+		if TextFile.save(params[:upload])
+			flash[:success] = "File upload successful!"
+			redirect_to analyze_path
+		else
+			flash[:danger] = "File upload failed. Only plain text files allowed."
+			session[:filename] = 'test.txt'
+			redirect_to analyze_path
+		end
 
 =begin
 		uploaded_file = params[:file]
@@ -34,8 +30,21 @@ class UploadController < ApplicationController
 
 	require 'string'
 	def analyze
-		@content = session[:file_content] || ''
+		@filename = session[:filename]
 
-		@content = @content.to_stem
+		if @filename.nil?
+			@content = "Looks like you haven't uploaded a file."
+		else
+			@content = File.read("#{Rails.root}/public/txt/#{@filename}")
+		end
+
+	end
+
+	def remove
+		@filename = session[:filename]
+
+		if File.exist?("#{Rails.root}/public/txt/#{@filename}")
+			File.delete("#{Rails.root}/public/txt/#{@filename}") 
+		end
 	end
 end
