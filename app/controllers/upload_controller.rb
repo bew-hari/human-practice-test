@@ -33,15 +33,12 @@ class UploadController < ApplicationController
 
 		if @filename.nil?
 			@notice = "Looks like you haven't uploaded a file."
-			@content = @stemmed_content = ''
+			@content = @frequency_count = ''
 		else
 			# read file contents into variable
 			@notice = ''
 			@content = File.read("#{Rails.root}/public/txt/#{@filename}")
-
-			clean_text = @content.gsub(/[.,!?]/, ' ').downcase
-			stems = clean_text.split.map{ |w| w = w.to_stem }
-			@stemmed_content = stems.join(' ')
+			@frequency_count = @content.frequency
 		end
 
 	end
