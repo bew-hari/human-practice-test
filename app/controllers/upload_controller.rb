@@ -7,12 +7,11 @@ class UploadController < ApplicationController
 	def create
 			
 			#puts 'FileFileFile:' + params[:upload][:file].tempfile.path
-		if TextFile.save(params[:upload])
+		if session[:filename] = TextFile.save(params[:upload])
 			flash[:success] = "File upload successful!"
 			redirect_to analyze_path
 		else
 			flash[:danger] = "File upload failed. Only plain text files allowed."
-			session[:filename] = 'test.txt'
 			redirect_to analyze_path
 		end
 
@@ -35,16 +34,21 @@ class UploadController < ApplicationController
 		if @filename.nil?
 			@content = "Looks like you haven't uploaded a file."
 		else
+			# read file contents into variable
 			@content = File.read("#{Rails.root}/public/txt/#{@filename}")
 		end
 
 	end
 
-	def remove
+
+	def cleanup
 		@filename = session[:filename]
 
-		if File.exist?("#{Rails.root}/public/txt/#{@filename}")
+		if !@filename.nil? and File.exist?("#{Rails.root}/public/txt/#{@filename}")
 			File.delete("#{Rails.root}/public/txt/#{@filename}") 
 		end
+
+		redirect_to root_path
 	end
+
 end

@@ -7,7 +7,7 @@ class TextFile < ActiveRecord::Base
 		# not a text file
     return nil if uploaded_file.content_type != 'text/plain'
    	
-    name = 'temp' + Time.now.strftime('%Y%m%d%H%M%S%N')
+    name = 'temp_' + Time.now.strftime('%Y%m%d%H%M%S%N')
     directory = "public/txt"
     # create the file path
     path = File.join(directory, name)

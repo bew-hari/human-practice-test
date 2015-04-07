@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   get 'analyze' => 'upload#analyze'
   post 'upload' => 'upload#create'
+  get 'cleanup'  => 'upload#cleanup'
 
 
 end
