@@ -1,7 +1,9 @@
 class UploadController < ApplicationController
 
 	def index
-		session[:filename] = nil
+		if !session[:filename].nil?
+			redirect_to cleanup_path
+		end
 	end
 
 	def create
@@ -30,10 +32,16 @@ class UploadController < ApplicationController
 		@filename = session[:filename]
 
 		if @filename.nil?
-			@content = "Looks like you haven't uploaded a file."
+			@notice = "Looks like you haven't uploaded a file."
+			@content = @stemmed_content = ''
 		else
 			# read file contents into variable
+			@notice = ''
 			@content = File.read("#{Rails.root}/public/txt/#{@filename}")
+
+			clean_text = @content.gsub(/[.,!?]/, ' ').downcase
+			stems = clean_text.split.map{ |w| w = w.to_stem }
+			@stemmed_content = stems.join(' ')
 		end
 
 	end
@@ -46,6 +54,7 @@ class UploadController < ApplicationController
 			File.delete("#{Rails.root}/public/txt/#{@filename}") 
 		end
 
+		session[:filename] = nil
 		redirect_to root_path
 	end
 

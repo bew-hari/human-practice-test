@@ -16,11 +16,11 @@ class TextFile < ActiveRecord::Base
     path = File.join(directory, name)
     # write the file
     File.open(path, "wb") { |f| 
-      #f.write(uploaded_file.read) 
+      f.write(uploaded_file.read) 
       #f.write(uploaded_file.readlines) while !uploaded_file.eof?
-      uploaded_file.readlines.each do |line|
-        f.write(line)
-      end
+      #uploaded_file.readlines.each do |line|
+      #  f.write(line)
+      #end
     }
     return name
   end

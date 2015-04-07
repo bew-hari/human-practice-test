@@ -1,5 +1,6 @@
-<div id="file_content">
-	<%= @content %>
+<div id="notice"><%= @notice %></div>
 
-	<%= button_to 'Upload another file', cleanup_path, :class => 'btn btn-default', :method => :get %>
-</div>
+<textarea rows="4" cols="50" disabled="true"><%= @content %></textarea>
+<textarea rows="4" cols="50" disabled="true"><%= @stemmed_content %></textarea>
+
+<%= button_to 'Upload another file', cleanup_path, :class => 'btn btn-default', :method => :get %>
