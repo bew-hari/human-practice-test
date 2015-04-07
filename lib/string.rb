@@ -1,3 +1,3 @@
 class String
-	include Stemmable
+	include PorterStemmer
 end

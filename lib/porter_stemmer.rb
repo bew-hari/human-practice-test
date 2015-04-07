@@ -1,4 +1,4 @@
-module Stemmable
+module PorterStemmer
 	
 	# Define constants
 	V = '[aeiouy]'												# vowel

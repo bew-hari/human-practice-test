@@ -5,14 +5,12 @@ class UploadController < ApplicationController
 	end
 
 	def create
-			
-			#puts 'FileFileFile:' + params[:upload][:file].tempfile.path
 		if session[:filename] = TextFile.save(params[:upload])
-			flash[:success] = "File upload successful!"
+			flash[:success] = 'File upload successful!'
 			redirect_to analyze_path
 		else
-			flash[:danger] = "File upload failed. Only plain text files allowed."
-			redirect_to analyze_path
+			flash[:danger] = 'File upload failed.'
+			redirect_to root_path
 		end
 
 =begin
