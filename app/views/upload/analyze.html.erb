@@ -1,6 +1,28 @@
-<div id="notice"><%= @notice %></div>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2">
+		
+		<h1>Your uploaded text</h1>
+		<textarea id="file_content" disabled="true"><%= @content %></textarea>
 
-<textarea rows="4" cols="50" disabled="true"><%= @content %></textarea>
-<textarea rows="4" cols="50" disabled="true"><%= @frequency_count %></textarea>
+		<h2>Results</h2>
+		<table>
+			<tr>
+				<th><h3>Rank</h3></th>
+				<th><h3>Stem</h3></th>
+				<th><h3># Occurence</h3></th>
+			</tr>
+			<% @frequency_count.each_with_index do |data, index| %>
+				<% break if index > 24 %>
+				<tr>
+					<%= content_tag(:td, index+1, width: "20%") %>
+					<%= content_tag(:td, data[0], width: "33%") %>
+					<%= content_tag(:td, data[1], width: "33%") %>
+				</tr>
+			<% end %>
+		</table>
 
-<%= button_to 'Upload another file', cleanup_path, :class => 'btn btn-default', :method => :get %>
+		<textarea rows="4" cols="50" disabled="true"><%= @frequency_count %></textarea>
+
+		<%= button_to 'Upload another file', cleanup_path, :class => 'btn btn-default', :method => :get %>
+	</div>
+</div>
