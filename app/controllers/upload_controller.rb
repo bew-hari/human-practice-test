@@ -7,6 +7,17 @@ class UploadController < ApplicationController
 	end
 
 	def create
+
+		text_file = TextFile.new
+		if session[:filename] = text_file.save(params[:upload])
+			flash[:success] = 'File upload successful!'
+			redirect_to analyze_path
+		else
+			flash[:danger] = text_file.flash_error
+			redirect_to root_path
+		end
+
+=begin
 		if session[:filename] = TextFile.save(params[:upload])
 			flash[:success] = 'File upload successful!'
 			redirect_to analyze_path
@@ -15,7 +26,7 @@ class UploadController < ApplicationController
 			redirect_to root_path
 		end
 
-=begin
+
 		uploaded_file = params[:file]
 		
 		respond_to do |format|

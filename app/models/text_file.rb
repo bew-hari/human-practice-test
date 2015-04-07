@@ -1,28 +1,34 @@
 class TextFile < ActiveRecord::Base
+  attr_accessor :filename, :flash_error
 
+	def save(upload)
+    if upload.nil?
+      self.flash_error = 'No file selected.'
+      return nil
+    end
 
-	def self.save(upload)
 		uploaded_file = upload['file']
 
-		# not a text file
-    return nil if uploaded_file.content_type != 'text/plain'
+		# check for file validity
+    if uploaded_file.content_type != 'text/plain'   # not plain text
+      self.flash_error = 'File upload failed. Only plain text allowed.'
+      return nil
+    elsif uploaded_file.size > 4.megabytes          # file exceeds size limit
+      self.flash_error = 'File upload failed. Maximum file size is 4 MB.'
+      return nil
+    end
 
-    # file exceeds size limit
-    return nil if uploaded_file.size > 4.megabytes
-   	
+
+   	# file is good to go
     name = 'temp_' + Time.now.strftime('%Y%m%d%H%M%S%N')
     directory = "public/txt"
     # create the file path
     path = File.join(directory, name)
     # write the file
-    File.open(path, "wb") { |f| 
-      f.write(uploaded_file.read) 
-      #f.write(uploaded_file.readlines) while !uploaded_file.eof?
-      #uploaded_file.readlines.each do |line|
-      #  f.write(line)
-      #end
-    }
-    return name
+    File.open(path, "wb") { |f| f.write(uploaded_file.read) }
+
+    # return file name if save success
+    name
   end
 
 end
