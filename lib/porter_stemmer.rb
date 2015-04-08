@@ -69,7 +69,7 @@ module PorterStemmer
 
 		# Set initial y, or y after a vowel, to Y
 		w[0] == 'Y' if w[0] == 'y'
-		w.gsub!(/(#{V})y/o, $1+'Y')
+		w.gsub!(/(?<=#{V})y/o, 'Y')
 		
 		#while w =~ /(#{V})y/o
 		#	w = $` + $1 + 'Y' + $'
