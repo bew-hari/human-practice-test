@@ -9,7 +9,7 @@ module FrequencyCounter
 
 		# Create hashtable to store results
 		freq = Hash.new
-		clean_text = str.gsub(/[.,!?]/, ' ').downcase
+		clean_text = str.gsub(/\W/, ' ').downcase
 		clean_text.split.each do |w|
 			stem = w.to_stem 
 			freq[stem] = freq.has_key?(stem) ? freq[stem]+1 : 1

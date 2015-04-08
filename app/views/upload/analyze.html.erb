@@ -1,28 +1,36 @@
 <div class="row">
 	<div class="col-md-8 col-md-offset-2">
 		
-		<h1>Your uploaded text</h1>
+		<h2 class="center">Original Text</h2>
 		<textarea id="file_content" disabled="true"><%= @content %></textarea>
 
-		<h2>Results</h2>
-		<table>
-			<tr>
-				<th><h3>Rank</h3></th>
-				<th><h3>Stem</h3></th>
-				<th><h3># Occurence</h3></th>
-			</tr>
+		<h2 class="center">Results (1 - 25)</h2>
+		<div id="results">
+			<div class="row">
+				<div class="col-md-2 col-sm-2 col-xs-2"><h3>Rank</h3></div>
+				<div class="col-md-5 col-sm-5 col-xs-5"><h3>Stem</h3></div>
+				<div class="col-md-5 col-sm-5 col-xs-5"><h3>Occurence</h3></div>
+			</div>
+			<p></p>
 			<% @frequency_count.each_with_index do |data, index| %>
 				<% break if index > 24 %>
-				<tr>
-					<%= content_tag(:td, index+1, width: "20%") %>
-					<%= content_tag(:td, data[0], width: "33%") %>
-					<%= content_tag(:td, data[1], width: "33%") %>
-				</tr>
+				<div class="row">
+					<%= content_tag(:div, index+1, class: "col-md-2 col-sm-2 col-xs-2") %>
+					<%= content_tag(:div, data[0], class: "col-md-5 col-sm-5 col-xs-5") %>
+					<%= content_tag(:div, data[1], class: "col-md-5 col-sm-5 col-xs-5") %>
+				</div>
+				<hr>
 			<% end %>
-		</table>
+		</div>
 
-		<textarea rows="4" cols="50" disabled="true"><%= @frequency_count %></textarea>
+		<div class="col-md-4 col-md-offset-4 col-xs-6 col-xs-offset-3">
+			<div class="btn-group btn-group-justified">
+				<div class="btn-group">
+				<%= button_to 'Upload a different file', cleanup_path, :class => 'btn btn-default', :method => :get %>
+				</div>
+			</div>
+		</div>
 
-		<%= button_to 'Upload another file', cleanup_path, :class => 'btn btn-default', :method => :get %>
+
 	</div>
 </div>

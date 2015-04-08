@@ -69,9 +69,11 @@ module PorterStemmer
 
 		# Set initial y, or y after a vowel, to Y
 		w[0] == 'Y' if w[0] == 'y'
-		while w =~ /(#{V})y/o
-			w = $` + $1 + 'Y' + $'
-		end
+		w.gsub!(/(#{V})y/o, $1+'Y')
+		
+		#while w =~ /(#{V})y/o
+		#	w = $` + $1 + 'Y' + $'
+		#end
 
 		# Define regions r1 and r2 as
 		# 	r1: region after the first non-vowel following a vowel, 
@@ -329,6 +331,8 @@ module PorterStemmer
 
 	  #puts 'Step 5: ' + w
 
+	  # restore y
+	  w.gsub(/Y/, 'y')
 
 	  # Return stem
 		w

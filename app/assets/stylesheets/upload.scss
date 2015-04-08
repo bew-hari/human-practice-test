@@ -2,10 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-textarea#file_content {
+
+
+#file_content {
 	width: 100%;
 	height: 200px;
-	resize: none;
-	overflow-y: scroll
+	overflow-y: scroll;
+	color: #555;
 }
 
+#results {
+	text-align: center;
+	font-size: 1.2em;
+	color: #555;
+}
