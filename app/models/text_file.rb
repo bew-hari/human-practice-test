@@ -21,7 +21,7 @@ class TextFile < ActiveRecord::Base
 
    	# file is good to go
     name = 'temp_' + Time.now.strftime('%Y%m%d%H%M%S%N')
-    directory = Rails.root.join("tmp/txt")
+    directory = Rails.root.join('tmp')
     # create the file path
     path = File.join(directory, name)
     # write the file
