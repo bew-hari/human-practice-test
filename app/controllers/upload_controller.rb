@@ -23,11 +23,11 @@ class UploadController < ApplicationController
 	def analyze
 		@filename = session[:filename]
 
-		if @filename.nil? or !File.exist?("#{Rails.root}/public/txt/#{@filename}")
+		if @filename.nil? or !File.exist?("#{Rails.root}/tmp/#{@filename}")
 			redirect_to root_path
 		else
 			# read file contents into variable
-			@content = File.read("#{Rails.root}/public/txt/#{@filename}")
+			@content = File.read("#{Rails.root}/tmp/#{@filename}")
 			@frequency_count = @content.frequency
 		end
 
@@ -37,8 +37,8 @@ class UploadController < ApplicationController
 	def cleanup
 		@filename = session[:filename]
 
-		if !@filename.nil? and File.exist?("#{Rails.root}/public/txt/#{@filename}")
-			File.delete("#{Rails.root}/public/txt/#{@filename}") 
+		if !@filename.nil? and File.exist?("#{Rails.root}/tmp/#{@filename}")
+			File.delete("#{Rails.root}/tmp/#{@filename}") 
 		end
 
 		session[:filename] = nil
