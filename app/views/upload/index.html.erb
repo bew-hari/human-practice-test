@@ -1,11 +1,36 @@
-<div id="upload-form" class="">
-	<%= form_tag '/upload', :multipart => true, 
-						   :remote => false, 
-						   :authenticity_token => true do %>
-		<div class="form-group">
-	   		<label for='upload_file'>Upload text File</label> 
-	   		<%= file_field 'upload', 'file' %>
-	   	</div>
-	   	<%= submit_tag 'Upload', class: 'btn btn-default' %>
-	<% end %>
+<div class="row">
+	<div class="col-md-8 col-md-offset-2 col-sm-10 col-sm-offset-1 col-xs-10 col-xs-offset-1">
+
+		<div class="row">
+			<h2 class="center">Word Stem Frequency Analyzer</h2>
+			<div id="intro">
+				<p>
+					Ever wonder what words are most commonly used? Fear not! Just simply upload a plain text file--the Word Stem Frequency Analyzer will look through the file, automatically apply the <a href="http://snowball.tartarus.org/algorithms/english/stemmer.html">English (Porter2) stemming algorithm</a> and return the top 25 word stems most frequently used.
+				</p>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3 col-sm-6 col-sm-offset-3 col-xs-10 col-xs-offset-1">
+				<div id="upload-form">
+					<%= form_tag '/upload', :multipart => true, 
+										   :remote => false, 
+										   :authenticity_token => true do %>
+						<div class="form-group">
+				   		<label for="upload_file" style="width: 100%">
+				   			<h4 class="c">Upload Text File</h4>
+				   		</label> 
+				   		<%= file_field :upload, :file %>
+				   	</div>
+				   	<div class="btn-group btn-group-justified">
+							<div class="btn-group">
+							<%= submit_tag 'Upload', class: 'btn btn-default' %>
+							</div>
+						</div>
+					<% end %>
+				</div>
+			</div>
+		</div>
+
+	</div>
 </div>
