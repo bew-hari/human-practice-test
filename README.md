@@ -3,10 +3,14 @@
 The Word Stem Frequency Analyzer is a web app that performs word stem frequency analysis on a user supplied text document. 
 
 
-### Usage Notes
+### Overview
 
-Most file formats supported under the Apache Tika toolkit (through the Yomu library). The [English (Porter2)](http://snowball.tartarus.org/algorithms/english/stemmer.html) stemmer algorithm will perform word stem extraction on the text data of the uploaded document, and the results will be displayed along with the original text.
+This web app:
+ 1. uses the built-in Ruby tempfile to handle user upload in conjunction with the [Yomu](https://github.com/Erol/yomu) library to read and save text content in a temporary local file,
+ 2. uses Ruby regular expressions to perform word stem extraction on the text data based on the [English (Porter2)](http://snowball.tartarus.org/algorithms/english/stemmer.html) stemmer algorithm and counts word frequencies, and
+ 3. displays the results along with the original user-supplied text.
 
+Most file formats supported under the Apache Tika toolkit (through the Yomu library). Upload size is limited to 4 MB.
 
 ### Technical
 
@@ -19,4 +23,4 @@ The Word Stem Frequency Analyzer relies on the following libraries/frameworks:
 
 ### Endnote
 
-This web app is a small coding exercise as the first step in the Human Practice interview process.
+This web app is a small coding exercise for the Human Practice interview process.
