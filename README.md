@@ -1,6 +1,6 @@
 # Word Stem Frequency Analyzer
 
-The Word Stem Frequency Analyzer is a web app that performs word stem frequency analysis on a user supplied text document. 
+The Word Stem Frequency Analyzer is a web app that performs word stem frequency analysis on a user supplied text document. See http://wordfrequencyanalyzer.herokuapp.com/ for the live application.
 
 
 ### Overview
